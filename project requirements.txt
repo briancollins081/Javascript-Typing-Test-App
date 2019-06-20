@@ -1,0 +1,56 @@
+	FUNCTIONAL REQUIREMENTS
+The test starts after the first character.
+Update results every second: 
+	wps - words per second
+	cps - characters per second
+	accuracy - typing correct characters
+	changes - the number of changes made
+
+During the test the active word is highlighted in green. 
+
+If a character is correct it is styled in blue otherwise it is styled in red.
+
+All the characters are initially white and stay like that if not typed.
+
+Pressing <<Enter>> || <<Space Bar>> sets the next word as the active one and scrolls the page to show the active word in the middle.
+
+<<Restart Button>> on the page relauches the test.
+
+TIME REQUIREMENTS
+When the page loads, the remaining time is set to the total test time.
+
+Total test time should be a parameter in the code which can be easily modified.
+
+Once the test starts, the displayed time decrements by one second every second unitl the the total test time becomes zero.
+
+The end of the test displays a result message in a dialog window with a name input and a download button which generates a certificate.
+
+CERTIFICATE REQUIREMENTS
+The certificate should be generated as a pdf file.
+
+It should display the test results: the wpm, accuracy and user level.
+
+The user level are broken down into:
+	Beginner level 	0-39
+	Average Level 	40-79
+	Expert level 	80-100
+
+CALCULATIONS REQUIREMENTS
+wpm = 60*(number of correct words excluding current word) / (elapsed time)
+
+cpm = 60*(number of correct characters excluding current word) / (elapsed time)
+
+Accuracy = 100 * (number of correct characters excluding current word) / (number of test characters excluding the current word)
+
+The value change = difference between the new value and the old value.
+
+TEST WORDS REQUIREMENTS
+Client will provide three lists of words
+	List 1: strings of 1000 words separated by spaces.
+	List 2: full text with punctuations and line returns.
+	List 3: full text with punctuations and line returns.
+
+The test launching code will have a parameter specifying which of those lists is to be used.
+
+List 1 is used in the test, words should be shuffled. Also random Capitalization and punctuations/line returns should be addressed in the code.
+

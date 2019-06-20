@@ -1,0 +1,40 @@
+The page loads:
+	Fill the content box.
+	Highlight the first word.
+	Focus on the text input.
+	Set the time left.
+Reset Button : reloads the page.
+
+Launch the test:
+	Check time left - every second.
+	If time left >=1 second
+		Calculate results
+		Update results HTML/Frontend
+		
+		Calculate new time 
+		Update time Frontend/HTML
+
+		Calculate the changes
+		Update the Frontend/HTML
+	If there is no time left, end the test.
+	Then show the results dialog window.
+	If user clicks download Button
+		Check if name exists:
+			if name exists - generate certificate
+			if name does not exist - highlight the name input field.
+
+User types a character:
+	If test not ended 
+		If test not started:
+			Launch the test.
+		If test started:
+			Check which character was typed.
+				If character <<space>>/<<enter>>:
+					-format the current word.
+					-unhilight it.
+					-move to the next word.
+					-highlight the next word.
+					-scroll new word into middle view.
+					
+				else:
+					-Format current word
