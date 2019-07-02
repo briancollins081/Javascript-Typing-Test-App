@@ -4,28 +4,148 @@
         <!-- Required meta tags -->
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
+        <title>Typing Test App</title>
         <!-- Bootstrap CSS -->
         <link rel="stylesheet" href="assets/css/bootstrap.min.css" />
-        <link href="https://fonts.googleapis.com/css?family=Quattrocento+Sans" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="assets/css/styling.css">
     </head>
     <body>      
-        <div>
-           
-        </div>
-        
+        <div class="container-fluid">
+            <div class="text-center">
+                <header>
+                    <h1>Typing Test</h1>
+                </header>
+                <div class="row">
+                    <div class="col-xs-3 measurement">
+                        <div class="meas_container">
+                            <div class="typingIcon">
+                                <img src="img/speed2.png" alt="Speed Icon" width="60">
+                            </div>
+                            <div id="wpm" class="value">
+                                0
+                            </div>
+                            <div class="title">
+                                <span>WPM</span>
+                            </div>
+                        </div>
+                        <div class="change">
+                            <span id="wpmChange"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="meas_container">
+                            <div class="typingIcon">
+                                <img src="img/cpm.png" alt="CPM Icon" width="30">
+                            </div>
+                            <div id="cpm" class="value">
+                                0
+                            </div>
+                            <div class="title">
+                                <span>CPM</span>
+                            </div>
+                        </div>
+                        <div class="change">
+                            <span id="cpmChange"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="meas_container">
+                            <div class="typingIcon">
+                                <img src="img/stopwatch.png" alt="Time Icon" width="45">
+                            </div>
+                            <div id="timeLeft" class="value">
+                                0%
+                            </div>
+                            <div class="title">
+                                <span>Accuracy</span>
+                            </div>
+                        </div>
+                        <div class="change">
+                            <span id="wpmChange"></span>
+                        </div>
+                    </div>
+                    <div class="col-xs-3">
+                        <div class="meas_container">
+                            <div class="typingIcon">
+                                <img src="img/stopwatch.png" alt="Speed Icon" width="45">
+                            </div>
+                            <div id="timeLeft" class="value">
+                                0
+                            </div>
+                            <div class="title">
+                                <span>Time Left</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div id="content" class="text-center">  
+                        </div>
+                        
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- text input -->
+                        <div>
+                            <input type="text" placeholder="Type Here" class="text-center" id="input">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-12">
+                        <!-- keyboard -->
+                        <div class="keyboard">
 
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-4"></div>
+                    <div class="col-xs-4">
+                        <!-- restart button -->
+                        <div class="restart">
+                            <button type="button" class="btn btn-primary btn-sm btn-block" id="restart" onclick="location.reload()">Restart</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal" tabindex="-1" role="dialog" id="myModal">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                    <label for="name" class="sr-only">Enter your name:</label>
+                    <input type="text" class="form-control" id="name" placeholder="Your full name.">
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-info">Download your certificate.</button>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="assets/js/jquery-3.2.1.slim.min.js"></script>
         <script src="assets/js/popper.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
-        <script type="text/javascript" src="assets/js/code.js"></script>
         <script type="text/javascript" src="assets/js/dataModule.js"></script>
         <script type="text/javascript" src="assets/js/UIModule.js"></script>
         <script type="text/javascript" src="assets/js/certificateModule.js"></script>
         <script type="text/javascript" src="assets/js/wordsModule.js"></script>
         <script type="text/javascript" src="assets/js/eventsModule.js"></script>
+        <script type="text/javascript" src="assets/js/code.js"></script>
     </body>
 </html>
