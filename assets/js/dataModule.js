@@ -1,7 +1,7 @@
 var dataModule=(function () {
 	//shuffle function
-	shuffleFunction=function (testWordsArray) {
-		/*var shuffledArray[];
+	var shuffleFunction=function (testWordsArray) {
+		/*var shuffledArray=[];
 		var randIndex;
 		while(testWordsArray.length > 0){
 			var i=Math.floor(Math.random()*3);
@@ -10,16 +10,32 @@ var dataModule=(function () {
 			testWordsArray.splice(i,1);
 		}*/
 		//correct one
-		var shuffledArray[];
+		var shuffledArray=[];
 		var randIndex;
 		while(testWordsArray.length > 0){
 			randomIndex=Math.floor(Math.random()*testWordsArray.length);
 			shuffledArray.push(testWordsArray[randomIndex]);
 			testWordsArray.splice(randomIndex,1); 
 		}
-	}
+		return shuffledArray;
+	};
 	//capitalize rand
-
+	var randomCapitalization = function (testWordsArray) {
+		var randomlyCapitalizedArray=[];
+		//use values not the array object
+		for (var i = 0; i <testWordsArray.length; i++) {
+			randomlyCapitalizedArray[i] = testWordsArray[i];
+		}
+		var randomIndex;
+		while(testWordsArray.length > 0){
+			randomIndex=Math.floor(Math.random()*testWordsArray.length);
+			var str=testWordsArray[randomIndex];
+			randomlyCapitalizedArray[randomIndex]=str.charAt(0).toUpperCase()+str.slice(1);
+			testWordsArray.splice(randomIndex,1);
+		}
+		return randomlyCapitalizedArray;
+	}
+	
 	//panctuate rand
 
 	var appData={
@@ -117,5 +133,7 @@ var dataModule=(function () {
 		updateCurrentWord: function (value) {
 			
 		}
+
 	}
 })();
+
