@@ -2,6 +2,7 @@ var eventsModule = (function(dModule,uModule, cModule, wModule){
 	var addEventListeners = function () {
 		//character typing event listener
 		uModule.getDOMElements().textInput.addEventListener('input',function (event) {			
+
 			if(dModule.testEnded()){ /*do nothing if test ended*/
 				return;
 			}
@@ -20,21 +21,25 @@ var eventsModule = (function(dModule,uModule, cModule, wModule){
 			/*format the active word */
 			var currentWord=dModule.getCurrentWord();
 			uModule.formatWord(currentWord);
-			
+
 			/*space or enter pressed*/
 			
-			if(uModule.spacePressed()||uModule.enterPressed){
+			if(uModule.spacePressed(event)/*||uModule.enterPressed*/){
 				/*empty text input*/
-
+				uModule.emptyInput();
 				/*deactivate current word*/
-
-				/*move to new word: data module*/
-
-				/*set active word: UIModule*/
-
-				/*format active word: UIModule*/
+				uModule.deactivateCurrentWord();
+				/*move to a new word: dataModule*/
+				dModule.moveToNextWord();
+				/*set active word: UI Module*/
+				var cIndex=dModule.getCurrentWordIndex();
+				uModule.setActiveWord(cIndex);
+				/*format the active word UI Module*/
+				var currentWord=dModule.getCurrentWord();
+				uModule.formatWord(currentWord);
 
 				/*scroll new word in to middle view*/
+				uModule.scroll();
 			}	 
 
 		});

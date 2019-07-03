@@ -74,14 +74,14 @@ var UIModule = (function () {
 		flagNameInput: function () {
 			
 		},
-		spacePressed: function () {
-			
+		spacePressed: function (event) {
+			return event.data == " ";
 		},
 		enterPressed: function () {
 			
 		},
 		emptyInput: function () {
-			
+			DOMElements.textInput.value="";
 		},
 		getTypedWord: function () {
 			// console.log(DOMElements.textInput.value);
@@ -134,7 +134,7 @@ var UIModule = (function () {
 			DOMElements.activeWord = DOMElements.content.children[index];
 		},
 		deactivateCurrentWord: function () {
-			
+			DOMElements.activeWord.removeAttribute('class');
 		},
 		scroll: function () {
 			
