@@ -47,6 +47,9 @@ var eventsModule = (function(dModule,uModule, cModule, wModule){
 
 	};
 
+	//scroll active line into middle view on window resize
+	window.addEventListener('resize',uModule.scroll);
+
 	return{
 		//initialize the test before start
 		init: function (duration, textNumber) {
