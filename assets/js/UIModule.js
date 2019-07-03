@@ -135,9 +135,15 @@ var UIModule = (function () {
 		},
 		deactivateCurrentWord: function () {
 			DOMElements.activeWord.removeAttribute('class');
+
 		},
 		scroll: function () {
-			
+			var activeWord=DOMElements.activeWord;
+			var top1=activeWord.offsetTop;
+			var top2=DOMElements.content.offsetTop;
+			var diff=top1-top2;
+			/*Scroll content box*/
+			DOMElements.content.scrollTop=diff - 40;
 		}
 	}
 	
