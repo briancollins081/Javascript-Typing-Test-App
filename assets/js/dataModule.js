@@ -1,6 +1,8 @@
 var dataModule=(function () {
+	//line return
+	var lineReturn='|';
 	//shuffle function
-	var shuffleFunction=function (testWordsArray) {
+	var shuffleWords=function (testWordsArray) {
 		/*var shuffledArray=[];
 		var randIndex;
 		while(testWordsArray.length > 0){
@@ -19,24 +21,51 @@ var dataModule=(function () {
 		}
 		return shuffledArray;
 	};
+	
 	//capitalize rand
-	var randomCapitalization = function (testWordsArray) {
+	var addRandomCapitalization = function (testWordsArray) {
 		var randomlyCapitalizedArray=[];
 		//use values not the array object
 		for (var i = 0; i <testWordsArray.length; i++) {
 			randomlyCapitalizedArray[i] = testWordsArray[i];
-		}
+		};
 		var randomIndex;
 		while(testWordsArray.length > 0){
 			randomIndex=Math.floor(Math.random()*testWordsArray.length);
 			var str=testWordsArray[randomIndex];
 			randomlyCapitalizedArray[randomIndex]=str.charAt(0).toUpperCase()+str.slice(1);
 			testWordsArray.splice(randomIndex,1);
-		}
+		};
 		return randomlyCapitalizedArray;
-	}
-	
+	};
+	/*var f= ['lorem','ipsum','dolor','sit','amet','consectetur',
+	'adipisicing','elit.','Cum','labore','quod','id','minus','quas','minima','unde','ut','incidunt','nemo','porro.','Culpa','quam','asperiores','consequatur','quo','quia','accusantium','ducimus','distinctio','similique.'];
+	console.log(randomCapitalization(f));*/
+
 	//panctuate rand
+	var addRandomPunctuation=function (testWordsArray) {
+		return testWordsArray.map(function(currentWord) {
+			var items=[lineReturn,lineReturn,
+			'?','?',
+			',',',', ',', ',', ',', ',', 
+			'.','.','.',,'.',
+			'!','!',
+			'','','','','','','','','',''];
+			var randomIndex=Math.floor(Math.random()*items.length);
+			var randomPunctuation=items[randomIndex];
+			
+			return currentWord+randomPunctuation;
+		});
+	};
+	/*var f= ['lorem','ipsum','dolor','sit','amet','incidunt','nemo','lorem','ipsum','dolor','sit','amet','incidunt','nemo','lorem','ipsum','dolor','sit','amet','incidunt','nemo','lorem','ipsum','dolor','sit','amet','incidunt','nemo'];
+	console.log(addRandomPunctuation(f));
+	*/
+
+	/*calculate correct chars in user typed word*/
+	var noCorrectChars; //correct chars
+	var characterCallback=function (currentElement, index) {
+		noCorrectChars += (currentElement==this.characters.user[index]) ? 1:0;
+	};
 
 	var appData={
 		indicators:{
@@ -57,27 +86,52 @@ var dataModule=(function () {
 			numOfTestCharacters:0
 		},
 		words:{
-			currentWordIndex:0,
+			currentWordIndex:-1,
 			testWords:[],
 			currentWord:{}
 		}
 	};
 	// word constructor
 	var word = function(index) {
-
-	}
-	//update method
+		// word values correct and users
+		this.value={
+			correct:appData.words.testWords[index] + ' ',
+			user:'',
+			isCorrect: false
+		};
+		// chars correct and users
+		this.characters={
+			correct: this.value.correct.split(''),
+			user:[],
+			totalCorrect: 0,
+			totalTestChars:this.value.correct.length
+		};
+	};
+	//update method: updates the word object using the user typed values
 	word.prototype.update=function (value) {
+		//update the user input
+		this.value.user=value;
+		//update the words status(correct or incorrect)
+		this.value.isCorrect = (this.value.correct == this.value.user);
+		//update user characters
+		this.characters.user = this.value.user.split('');
+
+		//calc number of correct characters		
+		noCorrectChars=0;
+
+		var characterCallback2=characterCallback.bind(this);
 		
-	}
+		this.characters.correct.forEach(characterCallback2);
+		this.characters.totalCorrect=noCorrectChars;
+	};
 
 	return {
 		// indicators - test control
 		setTestTime: function (x) {
-			
+			appData.indicators.totalTestTime=x;
 		},
 		initializeTimeLeft: function () {
-			
+			appData.indicators.timeLeft=appData.indicators.totalTestTime;
 		},
 		startTest: function () {
 			
@@ -86,7 +140,7 @@ var dataModule=(function () {
 			
 		},
 		getTimeLeft: function () {
-			
+			return appData.indicators.timeLeft;
 		},
 		reduceTime: function () {
 			
@@ -98,7 +152,7 @@ var dataModule=(function () {
 			
 		},
 		testStarted: function () {
-			
+			return appData.indicators.testEnded;
 		},
 
 		//results
@@ -115,23 +169,56 @@ var dataModule=(function () {
 		//test words
 		fillListOfTestWords: function (textNumber,words) {
 			var result = words.split(" ");
-			if(textNUmber==0){
+			if(textNumber==0){
 				//shuffle the words
-
+				result=shuffleWords(result);
 				//capitalize random strings
-
+				result=addRandomCapitalization(result);
 				//add random panctuation
+				result=addRandomPunctuation(result);
 			}
 			appData.words.testWords=result;
 		},
 		getListOfTestWords: function () {
-			
+			return appData.words.testWords;
+		},
+		getCurrentWordIndex: function () {
+			return appData.words.currentWordIndex;
 		},
 		moveToNextWord: function () {
-			
+			if(appData.words.currentWordIndex > -1){
+				//update correct words number
+
+				//update no correct characters
+
+				//update no of test characters
+			}
+			appData.words.currentWordIndex ++;
+			var currentIndex=appData.words.currentWordIndex;
+			var newWord = new word(currentIndex);
+			appData.words.currentWord=newWord;
+
+
 		},
+		//updates the current word using the user input
 		updateCurrentWord: function (value) {
-			
+			appData.words.currentWord.update(value);
+		},
+		getLineReturn: function() {
+			return lineReturn;
+		},
+		getCurrentWord: function () {
+			var currentWord=appData.words.currentWord;
+			return {
+				value:{
+					correct:currentWord.value.correct,
+					user:currentWord.value.user
+				}
+			}
+		},
+
+		returnData(){
+			console.log(appData);
 		}
 
 	}

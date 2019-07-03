@@ -39,6 +39,8 @@ body{
 	font-size: 30px;
 	padding: 10px;
 	color: rgb(1, 226, 182);
+	border-radius: 3px;
+	border-width: 1px;
 }
 .keyboard{
 	min-height: 200px;
@@ -71,4 +73,14 @@ body{
 }
 .modal{
 	color: black;
+}
+.activeWord{
+	background-color: greenyellow;
+	border-radius: 5px;
+}
+.correctCharacter{
+	color: mediumblue;
+}
+.wrongCharacter{
+	color:mediumvioletred;
 }
