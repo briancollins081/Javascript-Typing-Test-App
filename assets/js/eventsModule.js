@@ -38,7 +38,7 @@ var eventsModule = (function(dModule,uModule, cModule, wModule){
 						//update cpm & cpmChange
 						[results.cpm, results.cpmChange] = dModule.calculateCpm();
 						//update accu & accuChange
-
+						[results.accuracy, results.accuracyChange] = dModule.calculateAccuracy();
 						dModule.returnData();
 
 					//update UI Module

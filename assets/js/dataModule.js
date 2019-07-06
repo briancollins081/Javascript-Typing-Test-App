@@ -171,8 +171,24 @@ var dataModule=(function () {
 
 			return [appData.results.wpm, appData.results.wpmChange];
 		},
+		// accuracy and accuracyChange
 		calculateAccuracy: function () {
-			
+			var accuracyOld = appData.results.accuracy;
+			var numOfCorrectCharacters = appData.results.numOfCorrectCharacters;
+			var numOfTestCharacters = appData.results.numOfTestCharacters;
+
+			if(appData.indicators.timeLeft!=appData.indicators.totalTestTime){
+				if(numOfTestCharacters!=0){
+					appData.results.accuracy = Math.round(100 * numOfCorrectCharacters / numOfTestCharacters);
+				}else{
+					appData.results.accuracy = 0;
+				}
+			}else{
+				appData.results.accuracy=0;
+			}
+			appData.results.accuracyChange=appData.results.accuracy - accuracyOld;
+			// console.log('Accuracy Change: '+appData.results.accuracyChange);
+			return [appData.results.accuracy, appData.results.accuracyChange];
 		},
 		calculateCpm: function () {
 			var cpmOld = appData.results.cpm;
