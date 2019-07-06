@@ -40,6 +40,30 @@ var UIModule = (function () {
 	var returnCharClass = function (currentCharacter, index) {
 		return 	(index < userValue.length)?(currentCharacter == userValue[index] ? 'correctCharacter':'wrongCharacter'):'0';
 	};
+	var updateChange = function (value, changeElement) {
+		//class decision to add to change element
+		//decide the html content to insert
+		var classToAdd, html;
+		[classToAdd, html] = (value >= 0)?['scoreUp','+'+value]:['scoreDown', value];
+		//add % to the change element
+		if(changeElement == DOMElements.accuracyChange){
+			html+= '%';
+		}
+		//update change elements
+		changeElement.innerHTML=html;
+		//style the element
+		changeElement.removeAttribute('class');
+		changeElement.className = classToAdd;
+
+		//fade element
+		fadeElement(changeElement);
+	};
+	var fadeElement=function (element) {
+		element.style.opacity = 1;
+		setTimeout(function () {
+			element.style.opacity=0.8;
+		},100);
+	}
 
 	return{
 		// get DOM elements
@@ -54,8 +78,17 @@ var UIModule = (function () {
 		},
 
 		//results
-		updateResults: function () {
-			
+		updateResults: function (results) {
+			//update wpm
+			DOMElements.wpm.innerHTML = results.wpm;
+			//update cpm
+			DOMElements.cpm.innerHTML = results.cpm;
+			//update accuracy
+			DOMElements.accuracy.innerHTML = results.accuracy + '%';
+			//update UI change elements
+			updateChange(results.wpmChange, DOMElements.wpmChange);
+			updateChange(results.cpmChange, DOMElements.cpmChange);
+			updateChange(results.accuracyChange, DOMElements.accuracyChange);
 		},
 		fillModal: function () {
 			

@@ -39,10 +39,9 @@ var eventsModule = (function(dModule,uModule, cModule, wModule){
 						[results.cpm, results.cpmChange] = dModule.calculateCpm();
 						//update accu & accuChange
 						[results.accuracy, results.accuracyChange] = dModule.calculateAccuracy();
-						dModule.returnData();
-
+						// dModule.returnData();
 					//update UI Module
-
+					uModule.updateResults(results);
 					//update time left @ second
 						//any time left:reduce time by one second data module
 
