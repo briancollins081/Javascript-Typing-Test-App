@@ -137,7 +137,7 @@ var dataModule=(function () {
 			appData.indicators.testStarted=true;
 		},
 		endTest: function () {
-			
+			appData.indicators.testEnded=true;
 		},
 		getTimeLeft: function () {
 			return appData.indicators.timeLeft;

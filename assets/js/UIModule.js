@@ -13,7 +13,7 @@ var UIModule = (function () {
 		nameInput: document.getElementById('nameInput'),
 		content: document.getElementById("content"),
 		activeWord: '',
-		modal: $('myModal')
+		modal: $('#myModal')
 	};
 
 	var spiltArray = function(string){
@@ -90,11 +90,13 @@ var UIModule = (function () {
 			updateChange(results.cpmChange, DOMElements.cpmChange);
 			updateChange(results.accuracyChange, DOMElements.accuracyChange);
 		},
-		fillModal: function () {
+		fillModal: function (wpm) {
 			
+			var html = '<div><p>You are a %type%!</p><p>You type at a speed of %wpm% words per minute!</p><img/ src="img/%image%" alt="%alt%"></div>';
+
 		},
 		showModal: function () {
-			
+			DOMElements.modal.modal('show');
 		},
 
 		//user input

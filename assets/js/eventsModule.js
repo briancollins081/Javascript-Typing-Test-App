@@ -42,22 +42,21 @@ var eventsModule = (function(dModule,uModule, cModule, wModule){
 						// dModule.returnData();
 					//update UI Module
 					uModule.updateResults(results);
-					//update time left @ second
-						//any time left:reduce time by one second data module
-
-						//update time remaining in UI Module
-
-						//no time left: end the test data module & clear interval 
-					
-					//fill the modal
-
-					//show the modal
 
 					if(dModule.timeLeft()){
 						//reduce time by 1
 						var timeLeft=dModule.reduceTime();
 						//update time remaining in UI Module
 						uModule.updateTimeLeft(timeLeft);
+					}else{
+					//no time left: end the test data module & clear interval 
+					clearInterval(b);
+					dModule.endTest();
+					// dModule.returnData();
+					//fill the modal
+					uModule.fillModal(results.wpm);
+					//show the modal
+					uModule.showModal();
 					}
 				},1000);
 
