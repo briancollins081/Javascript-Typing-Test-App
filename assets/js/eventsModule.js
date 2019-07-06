@@ -93,7 +93,15 @@ var eventsModule = (function(dModule,uModule, cModule, wModule){
 
 		});
 		//click on download button event listener
-
+		uModule.getDOMElements().download.addEventListener('click', function (event) {
+			if(uModule.isNameEmpty()){
+				uModule.flagNameInput();
+			}else{
+				var certificateData = dModule.getCertificateData();
+				
+				cModule.generateCertificate(certificateData);
+			}
+		})
 	};
 
 	//scroll active line into middle view on window resize

@@ -13,10 +13,13 @@
     <body>      
         <div class="container-fluid">
             <div class="text-center">
-                <header>
-                    <h1>Typing Test</h1>
-                </header>
                 <div class="row">
+                    <div class="col-xs-12">
+                        <header>
+                            <h1>Typing Test</h1>
+                        </header>
+                    </div>
+                    
                     <div class="col-xs-3 measurement">
                         <div class="meas_container">
                             <div class="typingIcon">
@@ -114,16 +117,18 @@
             </div>
         </div>
 
-        <div class="modal" tabindex="-1" role="dialog" id="myModal">
+        <div class="modal text-center" tabindex="-1" role="dialog" id="myModal">
           <div class="modal-dialog" role="document">
             <div class="modal-content">
               <div class="modal-header">
-                <h5 class="modal-title">Modal title</h5>
+                <h5 class="modal-title">You Finished Your Test!</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                   <span aria-hidden="true">&times;</span>
                 </button>
               </div>
               <div class="modal-body">
+
+                <hr id="hrNi"/>
                 <div class="form-group">
                     <label for="name" class="sr-only">Enter your name:</label>
                     <input type="text" class="form-control" id="nameInput" placeholder="Your full name.">
@@ -131,7 +136,7 @@
               </div>
               <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-info">Download your certificate.</button>
+                <button type="button" class="btn btn-info" id="download">Download your certificate.</button>
               </div>
             </div>
           </div>
@@ -139,6 +144,7 @@
         <!-- Optional JavaScript -->
         <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="assets/js/jquery-3.2.1.slim.min.js"></script>
+        <script src="assets/js/jspdf.debug.js"></script>
         <script src="assets/js/popper.min.js"></script>
         <script src="assets/js/bootstrap.min.js"></script>
         <script type="text/javascript" src="assets/js/dataModule.js"></script>

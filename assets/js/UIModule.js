@@ -11,9 +11,12 @@ var UIModule = (function () {
 		accuracyChange: document.getElementById('accuracyChange'),
 		textInput: document.getElementById('input'),
 		nameInput: document.getElementById('nameInput'),
+		/*nameField: document.getElementById('nameInput'),*/
+		hrNi: document.getElementById('hrNi'),
 		content: document.getElementById("content"),
 		activeWord: '',
-		modal: $('#myModal')
+		modal: $('#myModal'),
+		download: document.getElementById("download")
 	};
 
 	var spiltArray = function(string){
@@ -69,7 +72,8 @@ var UIModule = (function () {
 		// get DOM elements
 		getDOMElements: function () {
 			return {
-				textInput:DOMElements.textInput
+				textInput:DOMElements.textInput,
+				download: DOMElements.download
 			};
 		},
 		//indicators - test control
@@ -91,9 +95,38 @@ var UIModule = (function () {
 			updateChange(results.accuracyChange, DOMElements.accuracyChange);
 		},
 		fillModal: function (wpm) {
-			
-			var html = '<div><p>You are a %type%!</p><p>You type at a speed of %wpm% words per minute!</p><img/ src="img/%image%" alt="%alt%"></div>';
+			var results;
+			if(wpm <40){
+				results = {
+					type: 'Turtle',
+					image: 'turtle.jpg',
+					level: 'Begginer'
+				};
+			}else if(wpm < 70){
+				results = {
+					type: 'Horse',
+					image: 'horse.jpg',
+					level: 'Intermediate'
+				};
+			}else{
+				results = {
+					type: 'Puma',
+					image: 'puma.jpg',
+					level: 'Expert'
+				};
+			}
+			var html = '<div class="results"> <p>You are a %type%!</p><p>You type at a speed of %wpm% words per minute!</p><img width="300" height="200" class="img-responsive img-circle img-thumbnail" src="img/%image%" alt="%alt%"/> </div>';
 
+			html=html.replace('%type%',results.type);
+			html=html.replace('%wpm%',wpm);
+			html=html.replace('%image%',results.image);
+			html=html.replace('%alt%',results.type);
+
+			//insert HTML before hr before name input
+			DOMElements.hrNi.insertAdjacentHTML('beforebegin',html);
+
+			//store level in the download button
+			DOMElements.download.setAttribute('level',results.level);
 		},
 		showModal: function () {
 			DOMElements.modal.modal('show');
@@ -104,10 +137,12 @@ var UIModule = (function () {
 			DOMElements.textInput.focus();
 		},
 		isNameEmpty: function () {
-			
+			// console.log("Input Field: "+DOMElements.nameInput.value.length);
+			return DOMElements.nameInput.value.length == 0;
 		},
 		flagNameInput: function () {
-			
+			console.log(DOMElements.nameInput);
+			DOMElements.nameInput.style.borderColor='red';
 		},
 		spacePressed: function (event) {
 			return event.data == " ";

@@ -259,6 +259,13 @@ var dataModule=(function () {
 			}
 		},
 
+		getCertificateData(){
+			return {
+				wpm: appData.indicators.wpm,
+				accuracy: appData.indicators.accuracy
+			};
+		},
+
 		returnData(){
 			console.log(appData);
 		}
