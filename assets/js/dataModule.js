@@ -175,7 +175,17 @@ var dataModule=(function () {
 			
 		},
 		calculateCpm: function () {
-			
+			var cpmOld = appData.results.cpm;
+			var numOfCorrectCharacters=appData.results.numOfCorrectCharacters;
+			if(appData.indicators.timeLeft!=appData.indicators.totalTestTime){
+				appData.results.cpm = Math.round(60 * numOfCorrectCharacters / (appData.indicators.totalTestTime - appData.indicators.timeLeft));
+
+			}else{
+				appData.results.cpm=0;
+			}
+			appData.results.cpmChange=appData.results.cpm - cpmOld;
+
+			return [appData.results.cpm, appData.results.cpmChange];
 		},
 
 		//test words
@@ -188,7 +198,7 @@ var dataModule=(function () {
 				result=addRandomCapitalization(result);
 				//add random panctuation
 				result=addRandomPunctuation(result);
-			}
+			} 
 			appData.words.testWords=result;
 		},
 		getListOfTestWords: function () {
