@@ -134,7 +134,7 @@ var dataModule=(function () {
 			appData.indicators.timeLeft=appData.indicators.totalTestTime;
 		},
 		startTest: function () {
-			
+			appData.indicators.testStarted=true;
 		},
 		endTest: function () {
 			
@@ -143,21 +143,33 @@ var dataModule=(function () {
 			return appData.indicators.timeLeft;
 		},
 		reduceTime: function () {
-			
+			appData.indicators.timeLeft --;
+			return appData.indicators.timeLeft;
 		},
-		timeLeft: function () {
-			
+		timeLeft: function () { 
+			return appData.indicators.timeLeft != 0;
 		},
 		testEnded: function () {
-			
+			return appData.indicators.testEnded;
 		},
 		testStarted: function () {
-			return appData.indicators.testEnded;
+			return appData.indicators.testStarted;
 		},
 
 		//results
+		/*wpm & wpmChange*/
 		calculateWpm: function () {
-			
+			var wpmOld = appData.results.wpm;
+			var numOfCorrectWords=appData.results.numOfCorrectWords;
+			if(appData.indicators.timeLeft!=appData.indicators.totalTestTime){
+				appData.results.wpm = Math.round(60 * numOfCorrectWords / (appData.indicators.totalTestTime - appData.indicators.timeLeft));
+
+			}else{
+				appData.results.wpm=0;
+			}
+			appData.results.wpmChange=appData.results.wpm - wpmOld;
+
+			return [appData.results.wpm, appData.results.wpmChange];
 		},
 		calculateAccuracy: function () {
 			
@@ -188,10 +200,14 @@ var dataModule=(function () {
 		moveToNextWord: function () {
 			if(appData.words.currentWordIndex > -1){
 				//update correct words number
-
+				if(appData.words.currentWord.value.isCorrect==true){
+					appData.results.numOfCorrectWords++;
+				}
 				//update no correct characters
-
+				appData.results.numOfCorrectCharacters += 
+				appData.words.currentWord.characters.totalCorrect;
 				//update no of test characters
+				appData.results.numOfTestCharacters += appData.words.currentWord.characters.totalTestChars;
 			}
 			appData.words.currentWordIndex ++;
 			var currentIndex=appData.words.currentWordIndex;

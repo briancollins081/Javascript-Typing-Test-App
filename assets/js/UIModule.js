@@ -77,14 +77,14 @@ var UIModule = (function () {
 		spacePressed: function (event) {
 			return event.data == " ";
 		},
-		enterPressed: function () {
-			
+		enterPressed: function (lineReturn) {
+			return DOMElements.textInput.value.includes(lineReturn+' ');
 		},
 		emptyInput: function () {
 			DOMElements.textInput.value="";
 		},
 		getTypedWord: function () {
-			// console.log(DOMElements.textInput.value);
+			//console.log(DOMElements.textInput.value);
 			return DOMElements.textInput.value;
 		},
 		

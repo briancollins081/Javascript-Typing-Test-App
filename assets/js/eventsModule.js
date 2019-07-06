@@ -1,8 +1,25 @@
 var eventsModule = (function(dModule,uModule, cModule, wModule){
 	var addEventListeners = function () {
+		//key event listener for Enter key, Manually coded
+		uModule.getDOMElements().textInput.addEventListener('keydown',function (event) {
+			/*do nothing if test ended*/
+			if(dModule.testEnded()){
+				return;
+			}
+			//check if user pressed enter
+			var key=event.keyCode;
+			if(key==13){
+				uModule.getDOMElements().textInput.value+=dModule.getLineReturn()+' ';
+				//create new input event
+				var inputEvent = new Event('input');
+				//dispatch event
+				uModule.getDOMElements().textInput.dispatchEvent(inputEvent);
+			}
+		});
+		
 		//character typing event listener
 		uModule.getDOMElements().textInput.addEventListener('input',function (event) {			
-
+			
 			if(dModule.testEnded()){ /*do nothing if test ended*/
 				return;
 			}
@@ -10,7 +27,40 @@ var eventsModule = (function(dModule,uModule, cModule, wModule){
 
 			/*test not started yet, start it and count down*/
 			if(!dModule.testStarted()){
-				//start the test
+				//start the test:data module
+				dModule.startTest();
+				//start a counter
+				var b = setInterval(function () {
+					//calculate the results data module
+					var results = {};
+						//update wpm & wpmChange
+						[results.wpm, results.wpmChange] = dModule.calculateWpm();
+						//update cpm & cpmChange
+
+						//update accu & accuChange
+
+						dModule.returnData();
+
+					//update UI Module
+
+					//update time left @ second
+						//any time left:reduce time by one second data module
+
+						//update time remaining in UI Module
+
+						//no time left: end the test data module & clear interval 
+					
+					//fill the modal
+
+					//show the modal
+
+					if(dModule.timeLeft()){
+						//reduce time by 1
+						var timeLeft=dModule.reduceTime();
+						//update time remaining in UI Module
+						uModule.updateTimeLeft(timeLeft);
+					}
+				},1000);
 
 			}
 
@@ -24,7 +74,8 @@ var eventsModule = (function(dModule,uModule, cModule, wModule){
 
 			/*space or enter pressed*/
 			
-			if(uModule.spacePressed(event)/*||uModule.enterPressed*/){
+			if(uModule.spacePressed(event)||
+				uModule.enterPressed(dModule.getLineReturn())){
 				/*empty text input*/
 				uModule.emptyInput();
 				/*deactivate current word*/
