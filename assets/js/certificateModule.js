@@ -22,18 +22,24 @@ var certificateModule = (function () {
 			//add name
 			doc.setTextColor(29,210,242);
 			doc.setFontSize(19);
-			doc.text(105,90,'Andere','center');
+			//Using HTML traversal
+			var button = event.target;
+			var nameField = button.parentElement.previousElementSibling.children[2].children[1];
+			var name=nameField.value;
+			doc.text(105,90,name,'center');
 			//add text
 			doc.setTextColor(96,96,96);
 			doc.setFontSize(14);
 			doc.text(105,100,'For Achieving Results noted below as documented','center');
 			doc.text(105,107,' and verified by ABCEdu Company','center');
 			//add results
-			doc.text(105,117,'Level: Expert','center');
-			doc.text(105,124,'Average Speed: 84wpm','center');
-			doc.text(105,131,'Accuracy: 100%','center');
+			var level = event.target.getAttribute('level')
+			doc.text(105,117,'Level: '+level,'center');
+			doc.text(105,124,'Average Speed: '+data.wpm+'wpm','center');
+			doc.text(105,131,'Accuracy: '+data.accuracy+'%','center');
 			//add date
-			doc.text(125,142,'Awarded on: 10/31/2019');
+			var date=new Date();
+			doc.text(125,142,'Awarded on: '+date.toLocaleDateString('en-US'));
 			//add brand
 			doc.text(125,150,'ABCEdu EDUCATION');
 			//save document
